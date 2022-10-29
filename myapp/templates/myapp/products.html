@@ -1,0 +1,27 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+
+<div class="container items-center justify-center mx-auto px-4 grid grid-cols-2 grid-flow-row gap-5 p-5 z-30 place-content-center">
+
+  {% for p in products %}
+  <div class="card w-96 glass">
+    <figure><img class="object-cover h-60 w-90" src="{{p.image.url}}" alt="Something went wrong" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">{{p.name}}</h2>
+      <p>{{p.description}}<br></p>
+      </p>
+      <div class="card-actions justify-end">
+        <a href="{% url 'product_details' p.id %}">
+          <button class="btn btn-primary">$ {{p.price}}</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+ 
+
+  {% endfor %}
+</div>
+
+{% endblock %}
