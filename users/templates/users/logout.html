@@ -1,0 +1,17 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+{% comment %} <forms method="POST" action="{% url 'users:logout'%}">
+    {% csrf_token %} {% endcomment %}
+<div class="">
+    <div class="card card-side bg-base-100 shadow-xl">
+        <figure><img src="https://placeimg.com/80/80/people" alt="movie"></figure>
+        <div class="card-body">
+            <h2 class="card-title">Logging Out</h2>
+            <p>You have been logged out</p>
+            <div class="card-action justify-end">
+                <button class="btn btn-primary">Bye</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

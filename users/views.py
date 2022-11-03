@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from users.forms import NewUserForm
 
 # Create your views here.
 def register(request):
-    form = NewUserForm(request.POST)
+    print('ooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    form = NewUserForm(request.POST)    
     if request.method =='POST':
-        print(form.is_valid())
+        # print(form.is_valid)
+        print(f'form valid: {form.is_valid()}')
+
+        if form.is_valid():
+            form.save()
+        return redirect('/myapp/products')
 
     context ={
         'form': form,

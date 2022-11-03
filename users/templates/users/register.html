@@ -1,7 +1,7 @@
 {% extends "myapp/base.html" %}
 {% block content %}
 <h1 class="text-2xl font-bold m-10">👤User Registration</h1>
-<form class="w-2/5 shadow-md m-10 p-10" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" class="card-body w-2/5 shadow-xl m-10 p-10">
     {% csrf_token %}
     <div class="mb-5">
         <label class="block text-grey-700 text-sm font-bold mb-2" for="">User Name</label>

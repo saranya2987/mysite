@@ -16,14 +16,16 @@ Including another URLconf
 from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path,include
-from myapp.views import index, new_one, my_place, products
+from myapp.views import index, new_one, my_place
 from django.conf.urls.static import static
 
 from mysite import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/', include('myapp.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('__reload__/', include('django_browser_reload.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
