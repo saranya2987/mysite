@@ -2,7 +2,7 @@ from django.urls import path,include
 from requests import delete
 from .views import index, new_one, my_place, products, product_details, add_product,update_product,delete_product
 
-# app_name = 'myapp'
+app_name = 'myapp'
 
 urlpatterns = [
     path('',index),

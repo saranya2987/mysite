@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.db.models import Q
 from myapp.models import Product
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -29,6 +31,7 @@ def new_one(request):
 def my_place(request):
     return render(request, 'listing/my_place.html')
 
+@login_required
 def products(request):
     #p = Product.objects.filter(price__gt = 17000)
     p = Product.objects.all()
