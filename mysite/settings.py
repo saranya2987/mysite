@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'users',
     'tailwind',
     'theme',
-    'django_browser_reload'
-
+    'django_browser_reload',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,7 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 LOGIN_REDIRECT_URL = 'myapp:products'
 LOGIN_URL = 'users:login'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

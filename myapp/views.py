@@ -1,10 +1,11 @@
 from multiprocessing import context
-from tkinter import image_names
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.db.models import Q
 from myapp.models import Product
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView,TemplateView,DeleteView,CreateView,DetailView,UpdateView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -31,6 +32,12 @@ def new_one(request):
 def my_place(request):
     return render(request, 'listing/my_place.html')
 
+
+class ProductListView(ListView):
+    model = Product
+    template_name ='myapp/products.html'
+    context_object_name = 'products'
+
 @login_required
 def products(request):
     #p = Product.objects.filter(price__gt = 17000)
@@ -38,11 +45,18 @@ def products(request):
     context = {'products':p}
     return render(request, 'myapp/products.html',context=context)
 
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name ='myapp/product_details.html'
+    context_object_name = 'p'
+
 def product_details(request,id):
     p = Product.objects.get(id=id)
     context = {'p':p}
     return render(request, 'myapp/product_details.html',context=context)
 
+@login_required
 def add_product(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -50,13 +64,27 @@ def add_product(request):
         desc = request.POST.get('desc')
         image = request.FILES['upload']
         
-        p = Product(name=name,price=price,description=desc,image=image)
+        p = Product(name=name,price=price,description=desc,image=image,seller_name = request.user)
         p.save()
         
         
         return redirect('/myapp/products')
 
     return render(request, 'myapp/add_product.html')
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'price', 'description', 'image', 'seller_name']
+    template_name ='myapp/product_form.html'
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name ='myapp/update_product.html'
+    fields = ['name', 'price', 'description', 'image', 'seller_name']
+    context_object_name = 'p'
+    success_url = reverse_lazy('myapp:products')
+
 
 def update_product(request,id):
     p = Product.objects.get(id=id)
@@ -89,4 +117,7 @@ def delete_product(request,id):
 
     return render(request, 'myapp/delete_product.html',context=context)
 
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('myapp:products')
 
