@@ -119,5 +119,6 @@ def delete_product(request,id):
 
 class ProductDeleteView(DeleteView):
     model = Product
+    template_name ='myapp/delete_product.html'
     success_url = reverse_lazy('myapp:products')
 

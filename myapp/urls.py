@@ -15,7 +15,7 @@ urlpatterns = [
     path('products/add/',ProductCreateView.as_view(), name='add_product'),
 
     path('__reload__/', include('django_browser_reload.urls')),
-    path('products/update/<int:id>',update_product,name='update_product'),
+    # path('products/update/<int:id>',update_product,name='update_product'),
     path('products/update/<int:pk>',ProductUpdateView.as_view(), name='update_product'),
 
     # path('products/delete/<int:id>',delete_product,name='delete_product'),
