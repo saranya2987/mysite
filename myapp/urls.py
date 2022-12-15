@@ -1,7 +1,9 @@
 from django.urls import path,include
 from requests import delete
-from .views import ProductListView, ProductDetailView, ProductUpdateView, ProductDeleteView, ProductCreateView, index, new_one, my_place, product_details, add_product,update_product,delete_product
+from .views import ProductListView, ProductDetailView, ProductUpdateView, ProductDeleteView, ProductCreateView, index, new_one, my_place, product_details, add_product,update_product,delete_product,add_to_cart, cart
+from .views import cart
 app_name = 'myapp'
+
 
 urlpatterns = [
     path('',index),
@@ -20,6 +22,8 @@ urlpatterns = [
 
     # path('products/delete/<int:id>',delete_product,name='delete_product'),
     path('products/delete/<int:pk>',ProductDeleteView.as_view(), name='delete_product'),
+    path('products/cart',add_to_cart, name='add_to_cart'),
+    path('products/cart',cart.as_view(), name='cart'),
 
 
 ]

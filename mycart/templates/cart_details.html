@@ -14,11 +14,6 @@
         <a href="{% url 'myapp:product_details' p.id %}">
           <button class="btn btn-primary">$ {{p.price}}</button>
         </a>
-        <form action="/" method="POST">
-          {% csrf_token %}
-          <input hidden type="text" name="product" value="{{p.id}}" > 
-          <button class="btn btn-primary">🛒Add To Cart</button>
-        </form>
       </div>
     </div>
   </div>
@@ -30,3 +25,4 @@
 </div>
 
 {% endblock %}
+  

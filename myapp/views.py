@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.db.models import Q
+from django.views import View
 from myapp.models import Product
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,TemplateView,DeleteView,CreateView,DetailView,UpdateView
@@ -122,3 +123,41 @@ class ProductDeleteView(DeleteView):
     template_name ='myapp/delete_product.html'
     success_url = reverse_lazy('myapp:products')
 
+# def add_to_cart(request):
+#     if request .user.is_authenticated:
+#         if request.method=="POST":
+#             pid = request.POST["pid"]
+#             qty = request.POST["qty"]
+#             is_exist = cart.objects.filter(product__id=pid,user___id=request.user.id)
+#             if len(is_exist)>0:
+#                 context["msz"]= "Item already exist in your cart"
+#             else:
+#                 product = object.get(add_product,id=pid)
+#                 usr = object.get(User,id=request.user.id)
+#                 c = cart(user=usr,product=product,quantity=qty)
+#                 c.save()
+#                 context["msz"]= "{} Added in your cart" .format(product.name)
+
+#     return render(request,"cart.html")
+
+def add_to_cart(self, request):
+    product = request.POST.get('product')
+    cart = request.session.get('cart')
+    if cart:
+        quantity = cart.get(product)
+        if quantity:
+            cart[products] = quantity+1
+        else:
+            cart[products] = 1
+    else:
+        cart = {}
+        cart[products] = 1
+        request.session['cart'] = cart
+        print(request.session['cart'])
+        # return redirect('/myapp/products')
+
+    return render(request, 'myapp/products.html')
+    
+class cart(View):
+    def get(self, request):
+        return render(request,'products.html')
