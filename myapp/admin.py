@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from myapp.models import Product
-from myapp.models import cart
+# from myapp.models import cart
 
 # Register your models here.
 
@@ -24,8 +24,8 @@ class ProductAdmin(admin.ModelAdmin):
     actions = ('set_price_to_zero','set_price_to_fiftyk')
 
 admin.site.register(Product,ProductAdmin)
-admin.site.register(cart)
+# admin.site.register(cart)
 
 class CartAdmin(admin.ModelAdmin):
     list_display = ('user','id','product','price','date',)
-    search_fields = ('name',)
+    search_fields = ('user',)

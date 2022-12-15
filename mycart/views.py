@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from mycart.models import Cart
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 # from .models import Cart, CartItem
@@ -7,9 +8,9 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 # Create your views here.
 
 
-def cart_details(request):
-    # return HttpResponse("This is a new one")
-    return render(request, 'cart_details.html')
+# def cart_details(request):
+#     # return HttpResponse("This is a new one")
+#     return render(request, 'cart_details.html')
 
 # def cart_add(request, id):
 #     cart = Cart(request)
@@ -39,3 +40,12 @@ def cart_details(request):
 # class DeleteCart(DeleteView):
 #     model = Cart
 #     template_name = 'cart/delete_cart.html'
+
+def add_to_cart(request, product_id):
+    cart = Cart(request)
+    cart.add(product_id)
+    
+    return render(request,'mycart/menu_cart.html')
+
+def cart(request):
+    return render(request, 'cart.html')
